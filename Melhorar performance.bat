@@ -1,8 +1,11 @@
 ::Criar um ponto de restauração.
 
-Enable-ComputerRestore -Drive C:\  ::Hablita a função de criação de pontos de restauração.
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /v RPLimitPercent /t REG_DWORD /d 7 /f ::Defini com 7% do disco pode ser usado para criar ponto de restauração.
-@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command Checkpoint-Computer -Description "Antes_Melhoramento_de_Performance"  ::Cria o ponto de restauração.
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command Enable-ComputerRestore -Drive C:\  
+::Hablita a função de criação de pontos de restauração.
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /v RPLimitPercent /t REG_DWORD /d 7 /f 
+::Defini com 7% do disco pode ser usado para criar ponto de restauração.
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command Checkpoint-Computer -Description "Antes_Melhoramento_de_Performance"  
+::Cria o ponto de restauração.
 
 ::Modo aprimorado de energia.
 for /f "delims=" %%a in ('powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61') do set resposta=%%a
